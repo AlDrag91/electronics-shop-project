@@ -53,7 +53,7 @@ class Item:
     def instantiate_from_csv(cls, file):
         """инициализирующий экземпляры класса `Item` данными из файла"""
         cls.all = []
-        with open(file, newline='', encoding='cp1251') as csvfile:
+        with open(file, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=",")
             for row in reader:
                 # name = row['name']
