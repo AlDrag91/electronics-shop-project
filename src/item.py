@@ -1,3 +1,8 @@
+import csv
+
+from icecream import ic
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -11,9 +16,9 @@ class Item:
 
         :param name: Название товара.
         :param price: Цена за единицу товара.
-        :param quantity: Количество товара в магазине.
+         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
 
@@ -33,4 +38,32 @@ class Item:
         """
         self.price = self.price - (self.price * self.quantity / 100)
 
-        self.all.extend([self.name, self.price, self.quantity])
+        self.all.extend([self.__name, self.price, self.quantity])
+
+    @property
+    def name(self):
+        return f'{self.__name}'
+
+    @name.setter
+    def name(self, __name):
+        """длину наименования товара оставляет 10 симвовов"""
+        self.__name = __name[:10]
+
+    @classmethod
+    def instantiate_from_csv(cls, file):
+        """инициализирующий экземпляры класса `Item` данными из файла"""
+        cls.all = []
+        with open(file, newline='', encoding='cp1251') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=",")
+            for row in reader:
+                # name = row['name']
+                # price = int(row['price'])
+                # quantity = int(row['quantity'])
+                ic(row)
+                cls.all.append(Item(row['name'], row['price'], row['quantity']))
+                #cls(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(number):
+        return int(float(number))
+
