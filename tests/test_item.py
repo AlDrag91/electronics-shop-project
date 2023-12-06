@@ -1,7 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from icecream import ic
 
-from src import item
 from src.item import Item
 
 
@@ -19,8 +18,11 @@ def test_item():
     #  Тест четение файла и подсчет данных
     Item.instantiate_from_csv('../src/itemss.csv')
     assert len(Item.all) == 5
+    item1 = Item.all[0]
+    ic(item1.name)
+    assert item1.name == 'Смартфон'
 
-    ic(Item.all)
+
 
     #  возвращение числа из числа-строки
     assert Item.string_to_number('55.5') == 55
