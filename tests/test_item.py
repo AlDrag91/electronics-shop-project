@@ -1,5 +1,4 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from icecream import ic
 
 from src.item import Item
 
@@ -19,10 +18,8 @@ def test_item():
     Item.instantiate_from_csv('../src/itemss.csv')
     assert len(Item.all) == 5
     item1 = Item.all[0]
-    ic(item1.name)
+
     assert item1.name == 'Смартфон'
-
-
 
     #  возвращение числа из числа-строки
     assert Item.string_to_number('55.5') == 55

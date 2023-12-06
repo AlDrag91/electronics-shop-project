@@ -56,14 +56,9 @@ class Item:
         with open(file, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=",")
             for row in reader:
-                # name = row['name']
-                # price = int(row['price'])
-                # quantity = int(row['quantity'])
                 ic(row)
                 cls.all.append(Item(row['name'], row['price'], row['quantity']))
-                #cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(number):
         return int(float(number))
-
