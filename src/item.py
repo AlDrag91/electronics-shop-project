@@ -1,7 +1,5 @@
 import csv
 
-from icecream import ic
-
 
 class Item:
     """
@@ -56,9 +54,14 @@ class Item:
         with open(file, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=",")
             for row in reader:
-                ic(row)
                 cls.all.append(Item(row['name'], row['price'], row['quantity']))
 
     @staticmethod
     def string_to_number(number):
         return int(float(number))
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"

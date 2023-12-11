@@ -25,3 +25,8 @@ def test_item():
     assert Item.string_to_number('55.5') == 55
     assert Item.string_to_number('10') == 10
     assert Item.string_to_number('5.5') == 5
+
+    #  __repr__ и __str__
+    item1 = Item("флэш-память", 500, 5)
+    assert repr(item1) == "Item('флэш-память', 500, 5)"
+    assert str(item1) == 'флэш-память'
