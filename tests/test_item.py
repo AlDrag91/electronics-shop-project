@@ -1,6 +1,7 @@
-"""Здесь надо написать тесты с использованием pytest для модуля item."""
+"""Здесь тесты с использованием pytest для кдасса item."""
 
 from src.item import Item
+from src.phone import Phone
 
 
 def test_item():
@@ -30,3 +31,8 @@ def test_item():
     item1 = Item("флэш-память", 500, 5)
     assert repr(item1) == "Item('флэш-память', 500, 5)"
     assert str(item1) == 'флэш-память'
+
+    # __add__
+    item1 = Item("Камера", 10000, 15)
+    phone1 = Phone('Xiaomi POCO', 14543, 5, 2)
+    assert item1 + phone1 == 20
