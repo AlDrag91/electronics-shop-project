@@ -14,7 +14,7 @@ class Phone(Item):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.__number_of_sim})"
 
     def __add__(self, other):
-        """магический метод сложения и логика проверки принадлежности к классу-родителя"""
+        """Магический метод сложения и логика проверки принадлежности к классу-родителя"""
         if not isinstance(other, Item):
             return "ValueError('Складывать можно только объекты Item и дочерние от них.')"
         return self.quantity + other.quantity
