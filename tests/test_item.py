@@ -1,4 +1,4 @@
-"""Здесь тесты с использованием pytest для кдасса item."""
+"""Здесь тесты с использованием pytest для класса item."""
 
 from src.item import Item
 from src.phone import Phone

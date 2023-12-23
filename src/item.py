@@ -19,7 +19,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        # self.all.append(self)
+        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -37,7 +37,7 @@ class Item:
         """
         self.price = self.price - (self.price * self.quantity / 100)
 
-        # self.price *= self.pay_rate
+        self.price *= self.pay_rate
 
         self.all.extend([self.__name, self.price, self.quantity])
 
@@ -47,17 +47,26 @@ class Item:
 
     @name.setter
     def name(self, __name):
-        """длину наименования товара оставляет 10 симвовов"""
+        """Длину наименования товара оставляет 10 симвовов"""
         self.__name = __name[:10]
 
     @classmethod
     def instantiate_from_csv(cls, file):
-        """инициализирующий экземпляры класса `Item` данными из файла"""
+        """Инициализирующий экземпляры класса `Item` данными из файла"""
         cls.all = []
-        with open(file, newline='', encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=",")
-            for row in reader:
-                cls.all.append(Item(row['name'], row['price'], row['quantity']))
+        """Логику метода оборачиваем в try/except"""
+        try:
+            with open(file, newline='', encoding='utf-8') as csvfile:
+                reader = csv.DictReader(csvfile, delimiter=",")
+                for row in reader:
+                    cls.all.append(Item(row['name'], row['price'], row['quantity']))
+        except FileNotFoundError:
+            # raise FileNotFoundError("Отсутствует файл item.csv")
+            print("Отсутствует файл item.csv")
+        except KeyError:
+            raise InstantiateCSVError
+        else:
+            print("Файл в порядке продолжаю работу!")
 
     @staticmethod
     def string_to_number(number):
@@ -71,3 +80,13 @@ class Item:
 
     def __add__(self, other):
         return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    """Класс исключения Поврежденный файл"""
+
+    def __init__(self, *args):
+        self.message = args[0] if args else 'Файл item.csv поврежден.'
+
+    def __str__(self):
+        return 'Файл item.csv поврежден.'  # f"{self.message}"
